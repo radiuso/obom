@@ -4,6 +4,7 @@ angular.module('obmApp', [
   'obmApp.auth',
   'obmApp.admin',
   'obmApp.constants',
+  'obmApp.things',
   'ngCookies',
   'ngResource',
   'ngSanitize',
