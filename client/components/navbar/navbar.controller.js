@@ -10,10 +10,18 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
-  constructor(Auth) {
+  constructor(Auth, $mdSidenav) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
+    this.sidenav = $mdSidenav;
+  }
+
+  toggleSidenav() {
+    console.log("toggle");
+    this.sidenav('obomsidenav').toggle()
+    .then(function () {
+    });
   }
 }
 
