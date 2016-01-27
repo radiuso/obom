@@ -12,11 +12,15 @@ angular.module('obmApp', [
   'ui.router',
   'ui.bootstrap',
   'validation.match',
-  'ngMaterial'
+  'ngMaterial',
+  'ngMessages'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+
+    $mdThemingProvider.theme('default')
+      .warnPalette('orange')
   });
