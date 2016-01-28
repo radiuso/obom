@@ -47,10 +47,12 @@
           <p class="help-block">{{ vm.errors.other }}</p>
       </md-card-content>
 
-      <md-card-actions layout="row" layout-align="center">
-        <md-button flex="50" type="submit" class="md-raised md-primary">Sign up</md-button>
-        <md-button flex="30" ui-sref="login" class="md-raised md-warn">Login</md-button>
+      <md-card-actions layout="column" layout-align="center">
+        <md-button type="submit" class="md-raised md-primary">Sign up</md-button>
+        <br/>
+        <span class="text-center">Already a member? <a ui-sref="login">Login</a></span>
       </md-card-actions>
+
     </md-card>
   </form>
 </div>

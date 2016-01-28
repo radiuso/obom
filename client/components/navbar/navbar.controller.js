@@ -5,6 +5,10 @@ class NavbarController {
   menu = [{
     'title': 'Home',
     'state': 'main'
+  },
+  {
+    'title': 'Restaurants',
+    'state': 'poi'
   }];
 
   isCollapsed = true;
@@ -18,7 +22,6 @@ class NavbarController {
   }
 
   toggleSidenav() {
-    console.log("toggle");
     this.sidenav('obomsidenav').toggle()
     .then(function () {
     });

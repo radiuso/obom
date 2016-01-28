@@ -19,9 +19,24 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '_variables.scss';
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'components/poi-list/poi-list.scss';
 @import 'main/main.scss';
+@import 'poi/poi.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navbar/navbar.scss';
 @import '../components/sidenav/sidenav.scss';
 // endinjector
+
+
+body, html {
+  background: url("../assets/images/restaurant.png");
+}
+
+md-content {
+  background-color: transparent;
+}
+
+md-card .md-card-image {
+  max-height: 100%;
+}

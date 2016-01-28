@@ -1,0 +1,29 @@
+<md-content class="md-padding layout-xs-column layout-row" layout-xs="column" layout="row">
+
+  <div flex-xs flex-gt-xs="{{flexSize}}" layout="column" ng-repeat="sublist in list">
+    <md-card ng-repeat="item in sublist">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{item.name}}</span>
+          <span class="md-subhead">{{item.info}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="card-media"
+                ng-class="{
+                  'md-media-lg': item.rate >= 4,
+                  'md-media-sm': item.rate < 4
+                }">
+            <img ng-src="{{item.photo}}" class="md-card-image" alt="poi-image">
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <div>
+          {{item.rate}}
+        </div>
+        <md-button>Action 1</md-button>
+        <md-button>Action 2</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>

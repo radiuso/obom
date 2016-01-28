@@ -7,7 +7,6 @@ class SidenavController {
   }
 
   close() {
-    console.log("test");
     this.$mdSidenav('obomsidenav').close();
   }
 }

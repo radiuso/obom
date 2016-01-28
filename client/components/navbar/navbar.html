@@ -1,21 +1,21 @@
-<md-toolbar class="navbar">
+<md-toolbar class="navbar" md-scroll-shrink>
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="">
+    <md-button class="md-icon-button" aria-label="Toggle">
       <i class="zmdi zmdi-menu" ng-click="nav.toggleSidenav()"></i>
     </md-button>
     <h2>
       <span>OBOM</span>
     </h2>
-    <md-button ng-repeat="item in nav.menu" ui-sref-active="active">
-        <a ui-sref="{{item.state}}">{{item.title}}</a>
+    <md-button ng-repeat="item in nav.menu" ui-sref-active="active" ui-sref="{{item.state}}">
+      {{item.title}}
     </md-button>
-    <md-button ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></md-button>
+    <md-button ng-show="nav.isAdmin()" ui-sref-active="active" ui-sref="admin">Admin</md-button>
     <span flex></span>
-    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></md-button>
-    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Sign in</a></md-button>
+    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
+    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="login">Sign in</md-button>
     <md-button ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </md-button>
-    <md-button ng-show="nav.isLoggedIn()" ui-sref-active="active" aria-label="settings"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></md-button>
-    <md-button ng-show="nav.isLoggedIn()"><a ui-sref="logout">Sign out</a></md-button>
+    <md-button ng-show="nav.isLoggedIn()" ui-sref-active="active" aria-label="settings" ui-sref="settings"><i class="zmdi zmdi-wrench"></i></md-button>
+    <md-button ng-show="nav.isLoggedIn()" ui-sref="logout">Sign out</md-button>
     <md-button class="md-icon-button" aria-label="More">
       <i class="zmdi zmdi-more-vert"></i>
     </md-button>
