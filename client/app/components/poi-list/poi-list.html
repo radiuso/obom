@@ -12,10 +12,7 @@
         }"
         md-rowspan="1" md-colspan="1" md-colspan-sm="2" md-colspan-md="4" md-colspan-lg="2">
       <span class="md-headline">{{item.name}}</span>
-      <br/>
-      <ul ng-repeat="tag in item.tags" ng-if="tag" class="label label-primary">
-        <li>{{tag}}</li>
-      </ul>
+      <md-chips ng-model="item.tags" ng-if="item.tag" readonly="true"></md-chips>
       <md-grid-tile-footer>
         <md-button>Action 1</md-button>
       </md-grid-tile-footer>
