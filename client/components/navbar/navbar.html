@@ -1,10 +1,11 @@
 <md-toolbar class="navbar" md-scroll-shrink>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Toggle">
-      <i class="zmdi zmdi-menu" ng-click="nav.toggleSidenav()"></i>
+      <i class="mdi mdi-menu" ng-click="nav.toggleSidenav()"></i>
     </md-button>
     <h2>
-      <span>OBOM</span>
+      <span></span>
+      <md-button ui-sref="main">OBOM</md-button>
     </h2>
     <md-button ng-repeat="item in nav.menu" ui-sref-active="active" ui-sref="{{item.state}}">
       {{item.title}}
@@ -17,7 +18,7 @@
     <md-button ng-show="nav.isLoggedIn()" ui-sref-active="active" aria-label="settings" ui-sref="settings"><i class="zmdi zmdi-wrench"></i></md-button>
     <md-button ng-show="nav.isLoggedIn()" ui-sref="logout">Sign out</md-button>
     <md-button class="md-icon-button" aria-label="More">
-      <i class="zmdi zmdi-more-vert"></i>
+      <i class="mdi mdi-dots-vertical"></i>
     </md-button>
   </div>
 </md-toolbar>

@@ -1,33 +1,24 @@
-<md-content class="md-padding layout-xs-column layout-row" layout-xs="column" layout="row">
 
-  <div flex-xs flex-gt-xs="{{flexSize}}" layout="column" ng-repeat="sublist in list">
-    <md-card ng-repeat="item in sublist">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{item.name}}</span>
-          <span class="md-headline">{{item.city}}</span>
-          <span class="md-headline">{{item.adress}}</span>
-          <ul ng-repeat="tag in item.tags" ng-if="tag" class="label label-primary">
-            <li>{{tag}}</li>
-          </ul>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div class="card-media"
-                ng-class="{
-                  'md-media-lg': item.rate >= 4,
-                  'md-media-sm': item.rate < 4
-                }">
-            <img ng-src="{{item.photo}}" class="md-card-image" alt="poi-image">
-          </div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <div>
-          {{item.rate}}
-        </div>
+<md-content class="md-padding">
+  <md-grid-list
+        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+
+    <md-grid-tile ng-repeat="item in items"
+        ng-class="{
+          'bg-color-red-400': item.rate >= 4,
+          'bg-color-amber-400': item.rate < 4
+        }"
+        md-rowspan="1" md-colspan="1" md-colspan-sm="2" md-colspan-md="4" md-colspan-lg="2">
+      <span class="md-headline">{{item.name}}</span>
+      <br/>
+      <ul ng-repeat="tag in item.tags" ng-if="tag" class="label label-primary">
+        <li>{{tag}}</li>
+      </ul>
+      <md-grid-tile-footer>
         <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
-      </md-card-actions>
-    </md-card>
-  </div>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
 </md-content>

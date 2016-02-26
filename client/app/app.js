@@ -13,7 +13,8 @@ angular.module('obmApp', [
   'ui.bootstrap',
   'validation.match',
   'ngMaterial',
-  'ngMessages'
+  'ngMessages',
+  'uiGmapgoogle-maps'
 ])
   .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
     $urlRouterProvider

@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
+$mdi-font-path:    "../bower_components/mdi/fonts";
+
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-$fa-font-path: "../bower_components/font-awesome/fonts";
 
 @import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
-@import '../bower_components/font-awesome/scss/font-awesome';
+@import '../bower_components/sass-material-colors/sass/sass-material-colors';
+@import '../bower_components/sass-material-colors/sass/sass-material-colors-classes';
 
 /**
  * App-wide Styles
@@ -26,6 +28,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import 'main/main.scss';
 @import 'poi/poi.scss';
 @import '../components/footer/footer.scss';
+@import '../components/map/map.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navbar/navbar.scss';
 @import '../components/sidenav/sidenav.scss';
@@ -40,6 +43,8 @@ md-content {
   background-color: transparent;
 }
 
-md-card .md-card-image {
-  max-height: 100%;
+.md-fab {
+  .mdi {
+    font-size: x-large;
+  }
 }
