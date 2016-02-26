@@ -2,9 +2,6 @@
 
 $mdi-font-path:    "../bower_components/mdi/fonts";
 
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-
-@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import '../bower_components/sass-material-colors/sass/sass-material-colors';
 @import '../bower_components/sass-material-colors/sass/sass-material-colors-classes';
 
@@ -26,7 +23,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import 'admin/admin.scss';
 @import 'components/poi-list/poi-list.scss';
 @import 'main/main.scss';
-@import 'poi/poi.scss';
+@import 'poi/details/details.scss';
+@import 'poi/list/list.scss';
 @import '../components/footer/footer.scss';
 @import '../components/map/map.scss';
 @import '../components/modal/modal.scss';
@@ -44,6 +42,12 @@ md-content {
 }
 
 .md-fab {
+  .mdi {
+    font-size: x-large;
+  }
+}
+
+.md-icon-button {
   .mdi {
     font-size: x-large;
   }

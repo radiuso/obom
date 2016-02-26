@@ -8,7 +8,8 @@
 
   function POIService($http) {
     return {
-      getAll: getAll
+      getAll: getAll,
+      get: get
     };
 
     function getAll() {
@@ -18,6 +19,10 @@
       function getAllFailed(error) {
         console.log(error);
       }
+    }
+
+    function get(id) {
+      return $http.get('/api/poi/' + id);
     }
 
   }

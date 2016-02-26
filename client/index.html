@@ -56,7 +56,6 @@
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/lodash.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -84,7 +83,8 @@
       <script src="app/components/poi-list/poi-list.directive.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
-      <script src="app/poi/poi.controller.js"></script>
+      <script src="app/poi/details/details.controller.js"></script>
+      <script src="app/poi/list/list.controller.js"></script>
       <script src="app/poi/poi.js"></script>
       <script src="app/poi/poi.service.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
@@ -96,6 +96,7 @@
       <script src="components/auth/user.service.js"></script>
       <script src="components/footer/footer.directive.js"></script>
       <script src="components/geolocation/geolocation.service.js"></script>
+      <script src="components/map/map.config.js"></script>
       <script src="components/map/map.controller.js"></script>
       <script src="components/map/map.directive.js"></script>
       <script src="components/modal/modal.service.js"></script>
@@ -110,8 +111,7 @@
       <!-- endinjector -->
 
     <!-- endbuild -->
-
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=fr"></script>
     <!--<script src="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>-->
   </body>
 </html>

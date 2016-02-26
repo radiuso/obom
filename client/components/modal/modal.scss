@@ -9,17 +9,17 @@
   }
 }
 .modal-primary .modal-header {
-  background: $brand-primary;
+  background: material-color('blue', '500');
 }
 .modal-info .modal-header {
-  background: $brand-info;
+  background: material-color('amber', '500');
 }
 .modal-success .modal-header {
-  background: $brand-success;
+  background: material-color('green', '500');
 }
 .modal-warning .modal-header {
-  background: $brand-warning;
+  background: material-color('orange', '500');
 }
 .modal-danger .modal-header {
-  background: $brand-danger;
+  background: material-color('red', '500');
 }

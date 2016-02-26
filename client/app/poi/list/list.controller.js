@@ -2,7 +2,7 @@
 
 (function() {
 
-class POIController {
+class POIListController {
 
   constructor($http, $scope, socket, POIService) {
     this.$http = $http;
@@ -13,14 +13,20 @@ class POIController {
       socket.syncUpdates('poi', this.poiList);
     });
 
+    this.poiActions = [{
+      icon: "map",
+      href: function(poi) {
+        return "poi-details({id: '" + poi._id + "'})";
+      }
+    }];
+
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('poi');
     });
-    
   }
 }
 
 angular.module('obmApp')
-  .controller('POIController', POIController);
+  .controller('POIListController', POIListController);
 
 })();

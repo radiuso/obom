@@ -1,4 +1,3 @@
-
 <md-content class="md-padding">
   <md-grid-list
         md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
@@ -10,11 +9,15 @@
           'bg-color-red-400': item.rate >= 4,
           'bg-color-amber-400': item.rate < 4
         }"
-        md-rowspan="1" md-colspan="1" md-colspan-sm="2" md-colspan-md="4" md-colspan-lg="2">
+        md-rowspan="1" md-colspan="1" md-colspan-sm="2" md-colspan-md="4" md-colspan-lg="2" ng-cloak>
       <span class="md-headline">{{item.name}}</span>
       <md-chips ng-model="item.tags" ng-if="item.tag" readonly="true"></md-chips>
       <md-grid-tile-footer>
-        <md-button>Action 1</md-button>
+        <md-button ng-repeat="action in actions"
+            ui-sref="{{action.href(item)}}"
+            class="md-icon-button md-primary" aria-label="action">
+          <md-icon class="mdi mdi-{{action.icon}}"></md-icon>
+        </md-button>
       </md-grid-tile-footer>
     </md-grid-tile>
   </md-grid-list>

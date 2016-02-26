@@ -8,10 +8,10 @@ angular.module('obmApp')
       restrict: 'E',
       scope: {
         items: "=",
-        nbCols: "="
+        nbCols: "=",
+        actions: "="
       },
       link: function (scope, element, attrs) {
-        
       }
     };
   });

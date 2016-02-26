@@ -34,6 +34,27 @@ angular.module('obmApp')
         this.coords.latitude = lat;
         this.coords.longitude = lng;
       };
+
+      this.getLatLng = function(adress) {
+        var geocoder = new google.maps.Geocoder();
+        return $q(function(resolve, reject) {
+          geocoder.geocode( { 'address': adress}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+
+                resolve({
+                  coords: {
+                    latitude: latitude,
+                    longitude: longitude
+                  }
+                });
+              } else {
+                reject(adress);
+              }
+          });
+        });
+      };
     }
 
     // Method for instantiating

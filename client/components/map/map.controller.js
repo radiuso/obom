@@ -3,52 +3,37 @@
 (function() {
 
 class MapController {
-  constructor(uiGmapIsReady, geolocation) {
+  constructor(mapConfig, uiGmapIsReady, geolocation, $scope) {
     var vm = this;
     this.geolocation = geolocation;
 
     // map options
-    this.map = {
-      control: {},
-      center: {
-        latitude: 0,
-        longitude: 0
-      },
-      zoom: 18,
-      options: {
-        styles: [{
-          "stylers": [{ "saturation": -100 }]
-        }]
-      }
-    };
+    this.map = mapConfig.map;
+    this.user_marker = mapConfig.user_marker;
 
-    // user position marker
-    this.marker = {
-      id: 1,
-      coords: {
-        latitude: 0,
-        longitude: 0
-      },
-      options: {
-        draggable: true
-      }
-    };
+    $scope.$watch("markers", (newVal) => {
+      this.markers = $scope.markers;
+    });
 
     // get the google map instance and create the autocomplete object
     uiGmapIsReady.promise(1).then(function(instances) {
       instances.forEach(function(inst) {
         var imap = inst.map;
-        var autoInput = document.getElementById('user_address');
-        var autoOptions = {types:["geocode"]};
 
+        // geocoder
         let geocoder = new google.maps.Geocoder;
         let infowindow = new google.maps.InfoWindow;
+
         // Autocomplete
+        var autoInput = document.getElementById('user_address');
+        var autoOptions = {types:["geocode"]};
+        imap.controls[google.maps.ControlPosition.TOP_CENTER].push(autoInput);
+
         let autocomplete = new google.maps.places.Autocomplete(autoInput, autoOptions);
         autocomplete.bindTo('bounds', imap);
 
         // marker event
-        vm.marker.events = {
+        vm.user_marker.events = {
           dragend: function (marker, eventName, args) {
             var pos = marker.getPosition();
             var latlng = {lat: pos.lat(), lng: pos.lng()};
@@ -58,7 +43,6 @@ class MapController {
             geocoder.geocode({'location': latlng}, function(results, status) {
               if (status === google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
-                  console.log(results);
                   infowindow.setContent(results[0].formatted_address);
                   infowindow.open(imap, marker);
                 } else {
@@ -68,14 +52,11 @@ class MapController {
                 window.alert('Geocoder failed due to: ' + status);
               }
             });
-
           }
-        };
-
+        }
         // event place changed
-        autocomplete.addListener('place_changed', function() {
+        autocomplete.addListener('place_changed', () => {
           var place = autocomplete.getPlace();
-          console.log(place);
           if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
@@ -92,17 +73,17 @@ class MapController {
 
   // use the browser geolocation function to find the user lat and lng
   findUserPosition() {
-    var vm = this;
-    this.geolocation.detect().then(function(coords) {
-      vm.setPosition(coords.latitude, coords.longitude);
+    this.geolocation.detect().then((coords) => {
+      this.setPosition(coords.latitude, coords.longitude);
     });
   }
 
   // update the geoloc position from the given lat and lng
   setPosition(lat, lng) {
     this.geolocation.setPosition(lat, lng);
-    this.marker.coords.latitude = lat;
-    this.marker.coords.longitude = lng;
+
+    this.user_marker.coords.latitude = lat;
+    this.user_marker.coords.longitude = lng;
 
     this.map.center = {
       latitude: lat,

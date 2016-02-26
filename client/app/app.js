@@ -10,7 +10,6 @@ angular.module('obmApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap',
   'validation.match',
   'ngMaterial',
   'ngMessages',

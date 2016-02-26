@@ -6,7 +6,10 @@ angular.module('obmApp')
       templateUrl: 'components/map/map.html',
       restrict: 'EA',
       controller: 'MapController',
-      controllerAs: 'vm',
+      controllerAs: 'drmap',
+      scope: {
+        markers: "="
+      },
       link: function (scope, element, attrs) {
       }
     };
