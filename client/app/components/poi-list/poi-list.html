@@ -5,7 +5,11 @@
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">{{item.name}}</span>
-          <span class="md-subhead">{{item.info}}</span>
+          <span class="md-headline">{{item.city}}</span>
+          <span class="md-headline">{{item.adress}}</span>
+          <ul ng-repeat="tag in item.tags" ng-if="tag" class="label label-primary">
+            <li>{{tag}}</li>
+          </ul>
         </md-card-title-text>
         <md-card-title-media>
           <div class="card-media"

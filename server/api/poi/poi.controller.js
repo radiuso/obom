@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Poi from './poi.model';
+import GLHandler from '../../components/sourceHandlers/grandLyonHandler.js';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -61,6 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Pois
 export function index(req, res) {
+  GLHandler.populate();
   Poi.findAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
