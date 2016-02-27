@@ -17,62 +17,61 @@ class MapController {
 
     // get the google map instance and create the autocomplete object
     uiGmapIsReady.promise(1).then(function(instances) {
-      instances.forEach(function(inst) {
-        var imap = inst.map;
+      var inst = instances[0];
+      var imap = inst.map;
 
-        // geocoder
-        let geocoder = new google.maps.Geocoder;
-        let infowindow = new google.maps.InfoWindow;
+      // geocoder
+      let geocoder = new google.maps.Geocoder;
+      let infowindow = new google.maps.InfoWindow;
 
-        // Autocomplete
-        var autoInput = document.getElementById('user_address');
-        var autoOptions = {types:["geocode"]};
-        imap.controls[google.maps.ControlPosition.TOP_CENTER].push(autoInput);
+      // Autocomplete
+      var autoInput = document.getElementById('user_address');
+      var autoOptions = {types:["geocode"]};
+      imap.controls[google.maps.ControlPosition.TOP_CENTER].push(autoInput);
 
-        let autocomplete = new google.maps.places.Autocomplete(autoInput, autoOptions);
-        autocomplete.bindTo('bounds', imap);
+      let autocomplete = new google.maps.places.Autocomplete(autoInput, autoOptions);
+      autocomplete.bindTo('bounds', imap);
 
-        // marker event
-        vm.user_marker.events = {
-          dragend: function (marker, eventName, args) {
-            var pos = marker.getPosition();
-            var latlng = {lat: pos.lat(), lng: pos.lng()};
+      // marker event
+      vm.user_marker.events = {
+        dragend: function (marker, eventName, args) {
+          var pos = marker.getPosition();
+          var latlng = {lat: pos.lat(), lng: pos.lng()};
 
-            vm.setPosition(pos.lat(), pos.lng());
+          vm.setPosition(pos.lat(), pos.lng());
 
-            geocoder.geocode({'location': latlng}, function(results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                  infowindow.setContent(results[0].formatted_address);
-                  infowindow.open(imap, marker);
-                } else {
-                  window.alert('No results found');
-                }
+          geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[0]) {
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(imap, marker);
               } else {
-                window.alert('Geocoder failed due to: ' + status);
+                window.alert('No results found');
               }
-            });
-          }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });
         }
-        // event place changed
-        autocomplete.addListener('place_changed', () => {
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-          }
+      }
+      // event place changed
+      autocomplete.addListener('place_changed', () => {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          window.alert("Autocomplete's returned place contains no geometry");
+          return;
+        }
 
-          // needed to force map refresh
-          if (place.geometry.viewport) {
-            imap.fitBounds(place.geometry.viewport);
-          } else {
-            imap.setCenter(place.geometry.location);
-            imap.setZoom(17);  // Why 17? Because it looks good.
-          }
+        // needed to force map refresh
+        if (place.geometry.viewport) {
+          imap.fitBounds(place.geometry.viewport);
+        } else {
+          imap.setCenter(place.geometry.location);
+          imap.setZoom(17);  // Why 17? Because it looks good.
+        }
 
-          // update the position
-          vm.setPosition(place.geometry.location.lat(), place.geometry.location.lng());
-        });
+        // update the position
+        vm.setPosition(place.geometry.location.lat(), place.geometry.location.lng());
       });
     });
 
