@@ -61,6 +61,15 @@ class MapController {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
           }
+
+          // needed to force map refresh
+          if (place.geometry.viewport) {
+            imap.fitBounds(place.geometry.viewport);
+          } else {
+            imap.setCenter(place.geometry.location);
+            imap.setZoom(17);  // Why 17? Because it looks good.
+          }
+
           // update the position
           vm.setPosition(place.geometry.location.lat(), place.geometry.location.lng());
         });
