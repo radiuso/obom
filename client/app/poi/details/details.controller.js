@@ -10,9 +10,10 @@ class POIDetailsController {
     this.POIService = POIService;
     this.geolocation = geolocation;
 
-    this.POIService.get($stateParams.id).then((response) => {
-      this.poi = response.data;
-      this.geolocation.getLatLng(this.poi.adress).then((position) => {
+    this.POIService.get($stateParams.id).then((poi) => {
+      this.poi = poi;
+
+      this.geolocation.getLatLng(this.poi.adress + " " + this.poi.city).then((position) => {
         this.markers = [{
           id: this.poi._id,
           coords: {
@@ -28,6 +29,20 @@ class POIDetailsController {
           .textContent('POI not found !')
       );
     });
+  }
+
+  addTag(newTag) {
+    // this.POIService.addTag({
+    //   poi: this.poi._id,
+    //   name: this.newTag
+    // });
+  }
+
+  removeTag(oldTag) {
+    // this.TagService.remove({
+    //   poi: this.poi._id,
+    //   tag: tag
+    // });
   }
 }
 

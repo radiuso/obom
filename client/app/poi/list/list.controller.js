@@ -8,8 +8,8 @@ class POIListController {
     this.$http = $http;
     this.POIService = POIService;
 
-    this.POIService.getAll().then(response => {
-      this.poiList = response.data;
+    this.POIService.getAll().then(pois => {
+      this.poiList = pois;
       socket.syncUpdates('poi', this.poiList);
     });
 

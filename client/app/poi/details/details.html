@@ -2,25 +2,6 @@
 <br/>
 <map markers="vm.markers"></map>
 
-<!--
-<md-chips ng-model="main.awesomeThings" readonly="false">
-  <md-chip-template>
-    {{$chip.name}}
-    <md-tooltip md-direction="left">
-        {{$chip.info}}
-    </md-tooltip>
-  </md-chip-template>
-    <md-icon ng-click="main.deleteThing($chip)" md-svg-icon="md-close"></md-icon>
+<md-chips ng-model="vm.poi.tags" readonly="false"
+  md-on-add="vm.addTag($chip)" md-on-remove="vm.removeTag($chip)">
 </md-chips>
-<md-content>
-  <form class="thing-form">
-    <div layout-gt-xs="row">
-      <md-input-container md-no-float class="md-block">
-        <label>Syncs in realtime across clients</label>
-        <input ng-model="main.newThing" placeholder="Add a new thing here.">
-      </md-input-container>
-    </div>
-    <md-button ng-click="main.addThing()" class="md-raised md-primary">Add New</md-button>
-  </form>
-</md-content>
--->

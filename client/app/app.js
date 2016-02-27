@@ -13,14 +13,20 @@ angular.module('obmApp', [
   'validation.match',
   'ngMaterial',
   'ngMessages',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'LocalStorageModule'
 ])
-  .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
 
     $mdThemingProvider.theme('default')
-      .warnPalette('orange')
+      .warnPalette('orange');
+
+    localStorageServiceProvider
+      .setPrefix('obom')
+      .setStorageType('localStorage') // localStorage or sessionStorage
+      ;
   });
