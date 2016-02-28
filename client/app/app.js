@@ -29,4 +29,9 @@ angular.module('obmApp', [
       .setPrefix('obom')
       .setStorageType('localStorage') // localStorage or sessionStorage
       ;
+  })
+  .run(function(loader, POIService) {
+    POIService.getAll().then((response) => {
+      
+    });
   });
