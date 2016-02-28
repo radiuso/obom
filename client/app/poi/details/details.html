@@ -1,7 +1,15 @@
-<h3>{{vm.poi.name}}</h3>
-<br/>
-<map markers="vm.markers"></map>
+<md-toolbar md-scroll-shrink>
+  <div class="md-toolbar-tools">{{vm.poi.name}}</div>
+</md-toolbar>
 
-<md-chips ng-model="vm.poi.tags" readonly="false"
-  md-on-add="vm.addTag($chip)" md-on-remove="vm.removeTag($chip)">
-</md-chips>
+<md-content>
+  <section>
+    <md-subheader class="md-primary">
+      <md-chips ng-model="vm.poi.tags" readonly="false" placeholder="Enter a tag"
+        md-on-add="vm.addTag($chip)" md-on-remove="vm.removeTag($chip)">
+      </md-chips>
+    </md-subheader>
+  </section>
+  <map markers="vm.markers"></map>
+
+</md-content>
