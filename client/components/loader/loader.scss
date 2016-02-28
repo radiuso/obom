@@ -1,8 +1,4 @@
 loader {
-  display: none;
-  /*background-image: url("/assets/images/eating.gif");
-  background-repeat: no-repeat;
-  background-size: cover;*/
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +7,13 @@ loader {
   height: 100%;
   z-index: 9999;
 
-  &.loading {
-    display: block;
+  &.loaded {
+    display: none;
+  }
+
+  &.loader-bg {
+    background-image: url("/assets/images/eating.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }

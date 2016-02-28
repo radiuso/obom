@@ -6,22 +6,30 @@ angular.module('obmApp')
       templateUrl: 'components/loader/loader.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
-        $timeout(function() {
-          // let loader = document.getElementById("state_loader");
+        $rootScope.$on('$stateChangeStart', function() {
+          loadStart();
+        });
 
-          $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams){
-              element.addClass("loading");
-            });
+        $rootScope.$on('$stateChangeSuccess', function() {
+            loadEnd();
+        });
 
-          $rootScope.$on('$stateChangeSuccess',
-            function(event, toState, toParams, fromState, fromParams){
-              //add a little delay
-              $timeout(function(){
-                element.removeClass("loading");
-              },1000)
-            });
-        }, 0);
+        $rootScope.$on('loadStart', function () {
+          loadStart();
+        });
+
+        $rootScope.$on('loadEnd', function () {
+          loadEnd();
+        });
+
+        function loadStart() {
+          element.removeClass("loaded");
+        }
+        function loadEnd() {
+          $timeout(function(){
+            element.addClass("loaded");
+          },1000);
+        }
       }
     };
   });
