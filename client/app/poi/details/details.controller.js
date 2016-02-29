@@ -5,10 +5,11 @@
 class POIDetailsController {
   poi = {};
 
-  constructor($http, $stateParams, $mdToast, POIService, geolocation) {
+  constructor($http, $stateParams, $mdToast, POIService, geolocation, TAGService) {
     this.$http = $http;
     this.POIService = POIService;
     this.geolocation = geolocation;
+    this.TAGService = TAGService;
 
     this.POIService.get($stateParams.id).then((poi) => {
       this.poi = poi;
@@ -32,10 +33,11 @@ class POIDetailsController {
   }
 
   addTag(newTag) {
-    // this.POIService.addTag({
-    //   poi: this.poi._id,
-    //   name: this.newTag
-    // });
+    console.log(newTag);
+    this.TAGService.update(this.poi._id, {
+      poi: this.poi._id,
+      name: newTag
+    });
   }
 
   removeTag(oldTag) {

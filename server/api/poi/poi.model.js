@@ -5,7 +5,7 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var PoiSchema = new mongoose.Schema({
   _id: { type: String, index: true },
   name: String,
-  tags: [String],
+  tags: { type:[String], default: [] },
   city: String,
   adress: String,
   phone: String,

@@ -102,3 +102,19 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Add a new tag to poi
+export function addTag(req, res) {
+var updatedPoi;
+  // console.log(req.params);
+  // console.log(req.body.name);
+  Poi.findByIdAsync(req.params.id)
+    .then(function(res) {
+      res.tags.push(req.body.name)
+      return res;
+    })
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
