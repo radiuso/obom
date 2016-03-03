@@ -11,6 +11,7 @@
       getAll: getAll,
       get: get,
       update: update,
+      remove: remove,
     };
 
     function getAll() {
@@ -23,6 +24,10 @@
 
     function update(id, tag){
       return $http.patch('/api/tags/' + id, tag);
+    }
+
+    function remove(id, tag){
+      return $http.delete('/api/tags/' + id + '/' + tag);
     }
   }
 })();

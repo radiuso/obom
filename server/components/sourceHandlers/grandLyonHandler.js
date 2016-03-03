@@ -14,7 +14,14 @@ function saveUpdates(updates) {
       });
   };
 }
-
+/**
+ * Get poi tags from the source
+ */
+function tagsHandler(tags, poi){
+  tags.forEach(function(tag){
+    poi.tags.push({name: tag});
+  });
+}
 
 module.exports = {
   /**
@@ -36,8 +43,8 @@ module.exports = {
           // Populate the new poi model
           var newPoi = new Poi(poi);
           newPoi._id = poi.id_sitra1;
-          newPoi.name = poi.nom;
           newPoi.tags = poi.type_detail.split(';');
+          newPoi.name = poi.nom;
           newPoi.city = poi.commune;
           newPoi.adress = poi.adresse;
           newPoi.phone = poi.telephone;

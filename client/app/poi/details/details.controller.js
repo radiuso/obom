@@ -33,18 +33,13 @@ class POIDetailsController {
   }
 
   addTag(newTag) {
-    console.log(newTag);
     this.TAGService.update(this.poi._id, {
-      poi: this.poi._id,
       name: newTag
     });
   }
 
   removeTag(oldTag) {
-    // this.TagService.remove({
-    //   poi: this.poi._id,
-    //   tag: tag
-    // });
+    this.TAGService.remove(this.poi._id, oldTag);
   }
 }
 

@@ -13,11 +13,11 @@
     };
 
     function getAll() {
-      return HttpCache.get('pois', '/api/poi');
+      return HttpCache.get('poi', '/api/poi');
     }
 
     function get(id) {
-      return HttpCache.getIn('pois', id, '/api/poi');
+      return HttpCache.getIn('poi', id, '/api/poi');
     }
   }
 })();

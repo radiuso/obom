@@ -105,9 +105,6 @@ export function destroy(req, res) {
 
 // Add a new tag to poi
 export function addTag(req, res) {
-var updatedPoi;
-  // console.log(req.params);
-  // console.log(req.body.name);
   Poi.findByIdAsync(req.params.id)
     .then(function(res) {
       res.tags.push(req.body.name)
@@ -117,4 +114,15 @@ var updatedPoi;
     .then(saveUpdates(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function removeTag(req, res) {
+  Poi.findByIdAndUpdate(
+    {_id : req.params.id},
+    {$pull: {tags: req.params.tag}},
+    {new: true}
+  )
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }

@@ -7,8 +7,8 @@ var router = express.Router();
 
 // router.get('/', controller.gatAllTags);
 // router.get('/:id', controller.getTags);
-// router.put('/:id', controller.addTag);
+router.put('/:id', controller.addTag);
 router.patch('/:id', controller.addTag);
-// router.delete('/:id', controller.destroyTag);
+router.delete('/:id/:tag', controller.removeTag);
 
 module.exports = router;
