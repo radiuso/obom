@@ -5,10 +5,8 @@ var controller = require('../poi/poi.controller');
 
 var router = express.Router();
 
-// router.get('/', controller.gatAllTags);
-// router.get('/:id', controller.getTags);
-router.put('/:id', controller.addTag);
-router.patch('/:id', controller.addTag);
-router.delete('/:id/:tag', controller.removeTag);
+router.put('/:tag/:id', controller.addTag);
+router.patch('/:tag/:id', controller.addTag);
+router.delete('/:tag/:id', controller.removeTag);
 
 module.exports = router;

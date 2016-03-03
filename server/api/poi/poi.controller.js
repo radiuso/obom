@@ -107,7 +107,7 @@ export function destroy(req, res) {
 export function addTag(req, res) {
   Poi.findByIdAsync(req.params.id)
     .then(function(res) {
-      res.tags.push(req.body.name)
+      res.tags.push(req.params.tag)
       return res;
     })
     .then(handleEntityNotFound(res))

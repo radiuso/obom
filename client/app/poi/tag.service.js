@@ -4,9 +4,9 @@
     .module('obmApp')
     .factory('TAGService', TAGService);
 
-  TAGService.$inject = ['$http'];
+  TAGService.$inject = ['$http', 'HttpCache'];
 
-  function TAGService($http) {
+  function TAGService($http, HttpCache) {
     return {
       getAll: getAll,
       get: get,
@@ -23,11 +23,11 @@
     }
 
     function update(id, tag){
-      return $http.patch('/api/tags/' + id, tag);
+      return HttpCache.update('poi', id, '/api/tags/' + tag);
     }
 
     function remove(id, tag){
-      return $http.delete('/api/tags/' + id + '/' + tag);
+      return HttpCache.delete('poi', id, '/api/tags/' + tag);
     }
   }
 })();
