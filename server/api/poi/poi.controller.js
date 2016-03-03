@@ -105,15 +105,15 @@ export function destroy(req, res) {
 
 // Add a new tag to poi
 export function addTag(req, res) {
-  Poi.findByIdAsync(req.params.id)
-    .then(function(res) {
-      res.tags.push(req.params.tag)
-      return res;
-    })
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  console.log(req.params);
+  Poi.findByIdAndUpdate(
+    {_id : req.params.id},
+    {$push: {tags: req.params.tag}},
+    {new: true}
+  )
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 export function removeTag(req, res) {
