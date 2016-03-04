@@ -8,7 +8,7 @@ function HttpCacheService($http, $q, localStorageService) {
       return $q(function(resolve, reject) {
         var localValue = localStorageService.get(key);
 
-        if(_.isNil(localValue)) {
+        if(_.isNil(localValue) || _.isEmpty(localValue)) {
           $http.get(uri)
             .then(function(response) {
               localStorageService.set(key, response.data);

@@ -4,25 +4,6 @@ var _ = require('lodash');
 import Poi from '../../api/poi/poi.model';
 import request from 'request';
 
-
-function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
-  };
-}
-/**
- * Get poi tags from the source
- */
-function tagsHandler(tags, poi){
-  tags.forEach(function(tag){
-    poi.tags.push({name: tag});
-  });
-}
-
 module.exports = {
   /**
    * Get the Poi JSON source then populate the database.
@@ -43,7 +24,12 @@ module.exports = {
           // Populate the new poi model
           var newPoi = new Poi(poi);
           newPoi._id = poi.id_sitra1;
-          newPoi.tags = poi.type_detail.split(';');
+
+          // Handle Tags
+          if(poi.type_detail.length !== 0){
+            newPoi.tags = poi.type_detail.split(';');
+          }
+
           newPoi.name = poi.nom;
           newPoi.city = poi.commune;
           newPoi.adress = poi.adresse;
@@ -67,11 +53,13 @@ module.exports = {
           }, upsertData, {
             upsert: true
           }, function(err, doc) {
-            if(err)
+            if (err)
               console.log(doc);
           });
 
         });
+      } else {
+        console.log(error);
       }
     })
   }

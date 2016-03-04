@@ -3,7 +3,6 @@
 (function() {
 
 class POIDetailsController {
-  poi = {};
 
   constructor($http, $stateParams, $mdToast, POIService, geolocation, TAGService) {
     this.$http = $http;
@@ -14,7 +13,7 @@ class POIDetailsController {
     this.POIService.get($stateParams.id).then((poi) => {
       this.poi = poi;
 
-      this.geolocation.getLatLng(this.poi.adress + " " + this.poi.city).then((position) => {
+      this.geolocation.getLatLng(this.poi.adress + ' ' + this.poi.city).then((position) => {
         this.markers = [{
           id: this.poi._id,
           coords: {
@@ -29,6 +28,7 @@ class POIDetailsController {
         $mdToast.simple()
           .textContent('POI not found !')
       );
+      console.log('Error : ' + response);
     });
   }
 

@@ -14,7 +14,7 @@ class POIListController {
     });
 
     this.poiActions = [{
-      icon: "map",
+      icon: 'map',
       href: function(poi) {
         return "poi-details({id: '" + poi._id + "'})";
       }
