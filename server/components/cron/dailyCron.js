@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import GLHandler from '../../components/sourceHandlers/grandLyonHandler.js';
 var CronJob = require('cron').CronJob;
+var moment = require('moment-timezone');
 
 var job = new CronJob({
   cronTime: '00 00 06 * * *',
@@ -13,6 +14,5 @@ var job = new CronJob({
      */
      GLHandler.populate();
   },
-  start: true,
-  timeZone: 'France/Paris'
+  start: true
 });

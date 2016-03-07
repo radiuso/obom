@@ -26,7 +26,7 @@ module.exports = {
           newPoi._id = poi.id_sitra1;
 
           // Handle Tags
-          if(poi.type_detail.length !== 0){
+          if (poi.type_detail.length !== 0) {
             newPoi.tags = poi.type_detail.split(';');
           }
 
@@ -48,16 +48,16 @@ module.exports = {
           // Do the upsert, which works like this: If no Poi document exists with
           // _id = newPoi.id, then create a new doc using upsertData.
           // Otherwise, update the existing doc with upsertData
-          Poi.update({
-            _id: newPoi._id
-          }, upsertData, {
-            upsert: true
-          }, function(err, doc) {
-            if (err)
-              console.log(doc);
-          });
-
+          Poi.update(
+            {_id: newPoi._id},
+            upsertData,
+            {upsert: true},
+            function(err, doc) {
+              if (err)
+                console.log(doc);
+            });
         });
+
       } else {
         console.log(error);
       }

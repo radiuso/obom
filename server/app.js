@@ -17,6 +17,9 @@ mongoose.connection.on('error', function(err) {
   process.exit(-1);
 });
 
+// Populate databases with Cron Job
+if (config.cron) { require('./components/cron/dailyCron'); }
+
 // Populate databases with sample data
 if (config.seedDB) { require('./config/seed'); }
 

@@ -10,6 +10,9 @@ module.exports = {
   },
 
   // Seed database on startup
-  seedDB: false
+  seedDB: false,
+
+  //Enable cron job to populate the DB
+  cron: true
 
 };
