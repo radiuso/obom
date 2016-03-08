@@ -4,6 +4,28 @@ var _ = require('lodash');
 import Poi from '../../api/poi/poi.model';
 import request from 'request';
 
+var geocoderProvider = 'google';
+var httpAdapter = 'http';
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter);
+
+/**
+ * Get the Poi model then populate the the coordinates.
+ *
+ * @return { latitude: String, longitude: String}
+ */
+function getCoordinates(poi){
+  geocoder.geocode(poi.adresse + ' ' + poi.commune)
+    .then(function(res) {
+      return  {
+        latitude: res[0].latitude,
+        longitude: res[0].longitude
+      }
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+}
+
 module.exports = {
   /**
    * Get the Poi JSON source then populate the database.
@@ -21,22 +43,28 @@ module.exports = {
           if (poi.type !== 'RESTAURATION')
             return;
 
-          // Populate the new poi model
-          var newPoi = new Poi(poi);
-          newPoi._id = poi.id_sitra1;
-
           // Handle Tags
+          var newTags;
           if (poi.type_detail.length !== 0) {
-            newPoi.tags = poi.type_detail.split(';');
+            newTags = poi.type_detail.split(';');
           }
 
-          newPoi.name = poi.nom;
-          newPoi.city = poi.commune;
-          newPoi.adress = poi.adresse;
-          newPoi.phone = poi.telephone;
-          newPoi.minRate = poi.tarifsmin;
-          newPoi.open = poi.ouverture;
-          newPoi.email = poi.email;
+          // Handle coordinates
+          var newCoordinates = getCoordinates(poi);
+
+          // Populate the new poi model
+          var newPoi = new Poi({
+            _id: poi.id_sitra1,
+            name: poi.nom,
+            city: poi.commune,
+            adress: poi.adresse,
+            phone: poi.telephone,
+            minRate: poi.tarifsmin,
+            open: poi.ouverture,
+            email: poi.email,
+            tags: newTags,
+            coordinates: newCoordinates
+          });
 
           // Convert the Model instance to a simple object using Model's 'toObject' function
           // to prevent weirdness like infinite looping...

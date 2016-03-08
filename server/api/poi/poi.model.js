@@ -8,6 +8,10 @@ var PoiSchema = new mongoose.Schema({
   tags: { type: Array, default: [] },
   city: String,
   adress: String,
+  coordinates: { 
+    latitude: String,
+    longitude: String
+  },
   phone: String,
   minRate: String,
   open: String,
