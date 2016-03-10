@@ -1,24 +1,35 @@
-<md-content class="md-padding">
-  <md-grid-list
-        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+<md-content class=' md-center' layout="row" layout-wrap>
+  <md-card  flex="25" flex-xs="100" flex-sm="45" flex-md="30" ng-repeat="item in items">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{item.name}}</span>
+        <span class="md-subhead">{{item.adress}}</span>
+      </md-card-header-text>
+    </md-card-header>
 
-    <md-grid-tile ng-repeat="item in items"
-        ng-class="{
-          'bg-color-red-400': item.rate >= 4,
-          'bg-color-amber-400': item.rate < 4
-        }"
-        md-rowspan="1" md-colspan="1" md-colspan-sm="2" md-colspan-md="4" md-colspan-lg="2" ng-cloak>
-      <span class="md-headline">{{item.name}}</span>
-      <md-chips ng-model="item.tags" ng-if="item.tag" readonly="true"></md-chips>
-      <md-grid-tile-footer>
-        <md-button ng-repeat="action in actions"
-            ui-sref="{{action.href(item)}}"
-            class="md-icon-button md-primary" aria-label="action">
-          <md-icon class="mdi mdi-{{action.icon}}"></md-icon>
-        </md-button>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-  </md-grid-list>
+    <!-- <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{item.name}}</span>
+      </md-card-title-text>
+    </md-card-title> -->
+    <!-- <md-card-title>
+      <md-card-title-media>
+        <div class="md-media-lg card-media">
+          <img src="http://placehold.it/140x150" class="md-card-image" alt="user avatar">
+        </div>
+      </md-card-title-media>
+    </md-card-title> -->
+    <img src="http://placehold.it/140x40" class="md-card-image" alt="user avatar">
+    <md-card-content>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-repeat="action in actions" ui-sref="{{action.href(item)}}" class="md-icon-button md-default" aria-label="action">
+        <md-icon class="mdi mdi-{{action.icon}}"></md-icon>
+    </md-card-actions>
+    </div>
+  </md-card>
 </md-content>
