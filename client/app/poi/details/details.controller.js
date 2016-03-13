@@ -18,7 +18,10 @@ class POIDetailsController {
           id: this.poi._id,
           coords: {
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
+          },
+          options: {
+            icon:'assets/images/poi_marker.png'
           }
         }];
       });
