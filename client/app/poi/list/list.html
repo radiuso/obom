@@ -1,1 +1,22 @@
-<poi-list items="vm.poiList" nb-cols="3" actions="vm.poiActions"></poi-list>
+<md-content class='md-center' layout="row" layout-wrap>
+  <md-card  flex="25" flex-xs="100" flex-sm="45" flex-md="30" ng-repeat="item in vm.poiList">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="mdi mdi-silverware"></md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{item.name}}</span>
+        <span class="md-subhead">{{item.adress}}</span>
+      </md-card-header-text>
+    </md-card-header>
+    <img src="http://placehold.it/140x40" class="md-card-image" alt="user avatar">
+    <md-card-content>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-repeat="action in vm.poiActions" ui-sref="{{action.href(item)}}" class="md-icon-button md-default" aria-label="action">
+        <md-icon class="mdi mdi-{{action.icon}}"></md-icon>
+    </md-card-actions>
+    </div>
+  </md-card>
+</md-content>

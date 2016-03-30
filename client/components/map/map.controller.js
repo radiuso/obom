@@ -100,7 +100,6 @@ class MapController {
           this.markers[i].coords.longitude)
         );
       }
-      console.log("not nil");
       this.imap.fitBounds(bounds);
     } else {
       this.map.center = {
