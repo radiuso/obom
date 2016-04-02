@@ -20,3 +20,24 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+md-card {
+  cursor: pointer;
+}
+
+md-card-header-text md-title {
+  font-size: large;
+}
+
+.proposals md-card:nth-child(2) md-card-avatar md-icon {
+  background: material-color('red', '400');
+}
+
+.mdi-star {
+  font-size: x-large;
+  color: material-color('yellow', '400');
+}
+
+.text-right {
+  text-align: right;
+}

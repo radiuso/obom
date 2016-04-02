@@ -2,4 +2,25 @@
 <md-content layout="row" layout-align="center center">
   <md-button class="md-raised md-primary" ng-click="main.suggest()">Suggest me !</md-button>
 </md-content>
-<map></map>
+
+<md-content layout="row" layout-align="center center" class="proposals">
+  <md-card ng-repeat="proposal in main.proposals"
+    flex="25" flex-xs="100" flex-sm="45" flex-md="30" class="md-raised"
+    ng-click="main.choose(proposal)">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="mdi mdi-silverware"></md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{proposal.name}}</span>
+        <span class="md-subhead">{{proposal.adress}} - {{proposal.city}}</span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <p class="text-right"><md-icon class="mdi mdi-star"></md-icon> {{proposal.minRate}}</p>
+      <p>
+        <md-chips ng-model="proposal.tags" readonly="true"></md-chips>
+      </p>
+    </md-card-content>
+  </md-card>
+</md-content>

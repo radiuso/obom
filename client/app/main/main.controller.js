@@ -3,8 +3,9 @@
 (function() {
 
 class MainController {
-  constructor(obomSplinter) {
+  constructor(obomSplinter, $state) {
     this.splinter = obomSplinter;
+    this.$state = $state;
   }
 
   suggest() {
@@ -15,7 +16,17 @@ class MainController {
       } else {
         this.proposals = res;
       }
+      return this.proposals;
+    }).then(proposals => {
+      console.log(proposals);
+      // set markers from lat and lng
     });
+  }
+
+  choose(poi) {
+    // query
+    // redirect to poi details
+    this.$state.go('poi-details', {id: poi._id});
   }
 }
 

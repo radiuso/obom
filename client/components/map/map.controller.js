@@ -9,11 +9,11 @@ class MapController {
 
     // map options
     this.map = mapConfig.map;
-    this.user_marker = mapConfig.user_marker;
+    this.userMarker = mapConfig.userMarker;
     this.imap = {};
     this.markers = [];
 
-    $scope.$watch("markers", (newVal) => {
+    $scope.$watch('markers', (newVal) => {
       if(newVal) {
         this.markers = $scope.markers;
       }
@@ -37,7 +37,7 @@ class MapController {
       autocomplete.bindTo('bounds', this.imap);
 
       // marker event
-      vm.user_marker.events = {
+      vm.userMarker.events = {
         dragend: function (marker, eventName, args) {
           var pos = marker.getPosition();
           var latlng = {lat: pos.lat(), lng: pos.lng()};
@@ -62,7 +62,7 @@ class MapController {
       autocomplete.addListener('place_changed', () => {
         var place = autocomplete.getPlace();
         if (!place.geometry) {
-          window.alert("Autocomplete's returned place contains no geometry");
+          window.alert('Autocomplete\'s returned place contains no geometry');
           return;
         }
 
@@ -86,8 +86,8 @@ class MapController {
   setPosition(lat, lng) {
     this.geolocation.setPosition(lat, lng);
 
-    this.user_marker.coords.latitude = lat;
-    this.user_marker.coords.longitude = lng;
+    this.userMarker.coords.latitude = lat;
+    this.userMarker.coords.longitude = lng;
 
     // fit bounds
     if (!_.isNil(this.imap)) {
@@ -100,13 +100,15 @@ class MapController {
           this.markers[i].coords.longitude)
         );
       }
-      this.imap.fitBounds(bounds);
+      if(_.isFunction(this.imap.fitBounds)) {
+        this.imap.fitBounds(bounds);
+      }
     } else {
       this.map.center = {
         latitude: lat,
         longitude: lng
       };
-      imap.setZoom(17);  // Why 17? Because it looks good.
+      this.imap.setZoom(17);  // Why 17? Because it looks good.
     }
   }
 }

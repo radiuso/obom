@@ -14,11 +14,11 @@ angular.module('obmApp.constants')
     options: {
       scrollwheel: false,
       styles: [{
-        "stylers": [{ "saturation": -100 }]
+        'stylers': [{ 'saturation': -100 }]
       }]
     }
   },
-  user_marker: {
+  userMarker: {
     id: 1,
     coords: {
       latitude: 0,
