@@ -12,20 +12,9 @@ class POIDetailsController {
 
     this.POIService.get($stateParams.id).then((poi) => {
       this.poi = poi;
-
-      this.geolocation.getLatLng(this.poi.adress + ' ' + this.poi.city).then((position) => {
-        this.markers = [{
-          id: this.poi._id,
-          coords: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-          options: {
-            icon:'assets/images/poi_marker.png'
-          }
-        }];
-      });
+      this.poiAdress = this.poi.adress + ' ' + this.poi.city;
     })
+    
     .catch(response => {
       $mdToast.show(
         $mdToast.simple()

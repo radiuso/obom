@@ -8,9 +8,8 @@ angular.module('obmApp')
       controller: 'MapController',
       controllerAs: 'drmap',
       scope: {
-        markers: "="
-      },
-      link: function (scope, element, attrs) {
+        markers: '=',
+        directionFrom: '='
       }
     };
   });

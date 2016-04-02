@@ -55,6 +55,20 @@ angular.module('obmApp')
           });
         });
       };
+
+      this.getDirection = function(request) {
+        var directionsService = new google.maps.DirectionsService();
+        
+        return $q(function(resolve, reject) {
+          directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+              resolve(result);
+            } else {
+              reject(result);
+            }
+          });
+        });
+      }
     }
 
     // Method for instantiating

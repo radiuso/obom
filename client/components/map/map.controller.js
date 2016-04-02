@@ -12,6 +12,14 @@ class MapController {
     this.userMarker = mapConfig.userMarker;
     this.imap = {};
     this.markers = [];
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+
+    $scope.$watch('directionFrom', (newVal) => {
+      if(newVal) {
+        this.directionFrom = $scope.directionFrom;
+        this.setDirection();
+      }
+    });
 
     $scope.$watch('markers', (newVal) => {
       if(newVal) {
@@ -25,12 +33,15 @@ class MapController {
       this.imap = inst.map;
 
       // geocoder
-      let geocoder = new google.maps.Geocoder;
-      let infowindow = new google.maps.InfoWindow;
+      let geocoder = new google.maps.Geocoder();
+      let infowindow = new google.maps.InfoWindow();
+
+      // direction
+      this.directionsDisplay.setMap(this.imap);
 
       // Autocomplete
       var autoInput = document.getElementById('user_address');
-      var autoOptions = {types:["geocode"]};
+      var autoOptions = {types:['geocode']};
       this.imap.controls[google.maps.ControlPosition.TOP_CENTER].push(autoInput);
 
       let autocomplete = new google.maps.places.Autocomplete(autoInput, autoOptions);
@@ -38,7 +49,7 @@ class MapController {
 
       // marker event
       vm.userMarker.events = {
-        dragend: function (marker, eventName, args) {
+        dragend: function (marker) {
           var pos = marker.getPosition();
           var latlng = {lat: pos.lat(), lng: pos.lng()};
 
@@ -57,7 +68,7 @@ class MapController {
             }
           });
         }
-      }
+      };
       // event place changed
       autocomplete.addListener('place_changed', () => {
         var place = autocomplete.getPlace();
@@ -103,12 +114,29 @@ class MapController {
       if(_.isFunction(this.imap.fitBounds)) {
         this.imap.fitBounds(bounds);
       }
+
+      this.setDirection();
     } else {
       this.map.center = {
         latitude: lat,
         longitude: lng
       };
       this.imap.setZoom(17);  // Why 17? Because it looks good.
+    }
+  }
+
+  setDirection() {
+    var start = new google.maps.LatLng(this.userMarker.coords.latitude, this.userMarker.coords.longitude);
+    var end = this.directionFrom;
+    if(!_.isNil(end)) {
+      var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.TravelMode.WALKING
+      };
+      this.geolocation.getDirection(request).then((result) => {
+        this.directionsDisplay.setDirections(result);
+      });
     }
   }
 }
