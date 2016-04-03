@@ -1,6 +1,16 @@
 <header class="banner"><img src="assets/images/Obom_Logo.png" alt="Logo"></header>
-<md-content layout="row" layout-align="center center">
-  <md-button class="md-raised md-primary" ng-click="main.suggest()">Suggest me !</md-button>
+<md-content layout="row" layout-padding class="bg-color-grey-50">
+  <form name="profileForm" ng-submit="main.suggest(profileForm)" flex>
+    <md-input-container class="md-block" flex="100">
+      <label>Distance Max (m)</label>
+      <input type="number" ng-model="main.profile.maxDistance">
+    </md-input-container>
+    <md-chips readonly="false" ng-model="main.profile.tags"></md-chips>
+    <br />
+    <div flex-align="center center" class="text-center">
+      <md-button type="submit" class="md-raised md-primary">Suggest me !</md-button>
+    </div>
+  </form>
 </md-content>
 
 <md-content layout="row" layout-align="center center" class="proposals">

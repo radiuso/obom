@@ -6,10 +6,13 @@ class MainController {
   constructor(obomSplinter, $state) {
     this.splinter = obomSplinter;
     this.$state = $state;
+    this.profile = {
+      tags: ['test']
+    };
   }
 
-  suggest() {
-    this.splinter.filter([], 100).then(res => {
+  suggest(profile) {
+    this.splinter.filter(profile).then(res => {
       if(_.size(res) >= 3) {
         // top 3
         this.proposals = res.slice(1, 4);

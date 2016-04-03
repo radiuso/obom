@@ -7,6 +7,15 @@
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Poi from '../api/poi/poi.model';
+import Profile from '../api/profile/profile.model';
+
+Profile.find({}).removeAsync()
+  .then(() => {
+    Profile.create({
+      distanceMax: 2000,
+      tags: ['restaurant']
+    });
+  });
 
 // Poi.find({}).removeAsync()
 //   .then(() => {

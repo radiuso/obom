@@ -17,6 +17,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/profile/profile.socket').register(socket);
   require('../api/poi/poi.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 
