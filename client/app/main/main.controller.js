@@ -7,12 +7,12 @@ class MainController {
     this.splinter = obomSplinter;
     this.$state = $state;
     this.profile = {
-      tags: ['test']
+      tags: ['restaurant']
     };
   }
 
-  suggest(profile) {
-    this.splinter.filter(profile).then(res => {
+  suggest(form) {
+    this.splinter.filter(this.profile).then(res => {
       if(_.size(res) >= 3) {
         // top 3
         this.proposals = res.slice(1, 4);
