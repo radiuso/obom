@@ -13,9 +13,10 @@ class MainController {
 
   suggest(form) {
     this.splinter.filter(this.profile).then(res => {
+      console.log(res);
       if(_.size(res) >= 3) {
         // top 3
-        this.proposals = res.slice(1, 4);
+        this.proposals = res.slice(0, 3);
       } else {
         this.proposals = res;
       }
