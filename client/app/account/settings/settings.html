@@ -1,51 +1,58 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Change Password</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
-
-        <div class="form-group">
+<div class="form-container" flex="50" flex-offset="25">
+  <form name="form" ng-submit="vm.changePassword(form)" novalidate>
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Change password</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-input-container class="md-block">
           <label>Current Password</label>
-
           <input type="password" name="password" class="form-control" ng-model="vm.user.oldPassword"
                  mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
+          <div ng-messages="form.password.$error" multiple>
+            <div ng-message="mongoose-error">
               {{ vm.errors.other }}
-          </p>
-        </div>
-
-        <div class="form-group">
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
           <label>New Password</label>
-
           <input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword"
                  ng-minlength="3"
                  required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || vm.submitted)">
-            Password must be at least 3 characters.
-          </p>
-        </div>
+            <div ng-messages="form.newPassword.$error" multiple>
+              <div ng-message="required">
+                Please enter a valid password.
+              </div>
+              <div ng-message="minlength">
+                Password must be at least 3 characters.
+              </div>
+            </div>
+        </md-input-container>
 
-        <div class="form-group">
-          <label>Confirm New Password</label>
+        <md-input-container class="md-block">
+          <label>Confirm Password</label>
+          <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword"
+            match="vm.user.newPassword"
+            ng-minlength="3"
+            required
+          />
+          <div ng-messages="form.confirmPassword.$error" multiple>
+            <div ng-message="match">
+              Passwords must match.
+            </div>
+          </div>
+        </md-input-container>
 
-          <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword"
-                 match="vm.user.newPassword"
-                 ng-minlength="3"
-                 required=""/>
-          <p class="help-block"
-             ng-show="form.confirmPassword.$error.match && vm.submitted">
-            Passwords must match.
-          </p>
+        <p class="help-block">{{ vm.errors.other }}</p>
+      </md-card-content>
 
-        </div>
-
-        <p class="help-block"> {{ vm.message }} </p>
-
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
-    </div>
-  </div>
+      <md-card-actions layout="row" layout-align="center">
+        <md-button type="submit" class="md-raised md-primary">Save</md-button>
+        <md-button ui-sref="main" type="button" class="md-raised md-warn">Cancel</md-button>
+      </md-card-actions>
+    </md-card>
+  </form>
 </div>
