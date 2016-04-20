@@ -12,7 +12,6 @@ export default function(app) {
   app.use('/api/profiles', require('./api/profile'));
   app.use('/api/tags', require('./api/tag'));
   app.use('/api/poi', require('./api/poi'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
