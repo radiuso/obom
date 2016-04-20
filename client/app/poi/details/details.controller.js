@@ -9,12 +9,13 @@ class POIDetailsController {
     this.POIService = POIService;
     this.geolocation = geolocation;
     this.TAGService = TAGService;
+    this.$mdToast = $mdToast;
 
     this.POIService.get($stateParams.id).then((poi) => {
       this.poi = poi;
       this.poiAdress = this.poi.adress + ' ' + this.poi.city;
     })
-    
+
     .catch(response => {
       $mdToast.show(
         $mdToast.simple()
@@ -25,11 +26,23 @@ class POIDetailsController {
   }
 
   addTag(newTag) {
-    this.TAGService.update(this.poi._id, newTag);
+    this.TAGService.update(this.poi._id, newTag)
+      .catch((err) => {
+        this.$mdToast.show(
+          this.$mdToast.simple()
+            .textContent('Error when trying to add "' + newTag + '"')
+        );
+      });
   }
 
   removeTag(oldTag) {
-    this.TAGService.remove(this.poi._id, oldTag);
+    this.TAGService.remove(this.poi._id, oldTag)
+      .catch((err) => {
+        this.$mdToast.show(
+          this.$mdToast.simple()
+            .textContent('Error when trying to delete "' + oldTag + '"')
+        );
+      });
   }
 }
 
