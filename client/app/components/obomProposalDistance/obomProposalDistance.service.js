@@ -2,18 +2,39 @@
 
 angular.module('obmApp')
   .service('obomProposalDistance', function () {
-    this.filter = function(list, position, distanceMax) {
-      // var res = [];
-      // _.each(list, (elem) => {
-      //   var distance = elem.coordinates.latitude - position.latitude;
-      //   distance += elem.coordinates.longitude - position.longitude;
-      //
-      //   if(distance <= distanceMax) {
-      //     res.distance = distance;
-      //     res.push(elem);
-      //   }
-      // });
+    this.filter = function(list, position, maxDistance) {
+      var res = [];
 
-      return list;
+      if(!_.isNil(maxDistance) && maxDistance > 0) {
+        _.each(list, (elem) => {
+          if(!_.isNil(elem.coordinates)) {
+            var distance = getDistanceFromLatLonInMeters(elem.coordinates.latitude, elem.coordinates.longitude, position.latitude, position.longitude);
+
+            if(distance <= maxDistance) {
+              res.distance = distance;
+              res.push(elem);
+            }
+          }
+        });
+      }
+      return _.isEmpty(res) ? list : res;
     };
+
+    function getDistanceFromLatLonInMeters(lat1,lon1,lat2,lon2) {
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = deg2rad(lon2-lon1);
+      var a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ;
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      var d = R * c; // Distance in km
+      return d * 1000;
+    }
+
+    function deg2rad(deg) {
+      return deg * (Math.PI/180)
+    }
   });

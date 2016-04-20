@@ -14,8 +14,8 @@
 </md-content>
 
 <md-content layout="row" layout-align="center center" class="proposals">
-  <md-card ng-repeat="proposal in main.proposals"
-    flex="25" flex-xs="100" flex-sm="45" flex-md="30" class="md-raised"
+  <md-card ng-repeat="proposal in main.proposals" class="md-raised"
+    flex="25" flex-xs="100" flex-sm="45" flex-md="30"
     ng-click="main.choose(proposal)">
     <md-card-header>
       <md-card-avatar>
@@ -32,5 +32,12 @@
         <md-chips ng-model="proposal.tags" readonly="true"></md-chips>
       </p>
     </md-card-content>
+  </md-card>
+  <md-card ng-if="main.proposals.length <= 0" flex>
+    <md-card-header>
+      <md-card-header-text>
+        <span class="md-title">No results</span>
+      </md-card-header-text>
+    </md-card-header>
   </md-card>
 </md-content>

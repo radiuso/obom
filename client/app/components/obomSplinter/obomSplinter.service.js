@@ -8,7 +8,7 @@ angular.module('obmApp')
         return obomProposalTags.filter(list, profile.tags);
       })
       .then(list => {
-        return obomProposalDistance.filter(list, geolocation.coords, profile.distanceMax);
+        return obomProposalDistance.filter(list, geolocation.coords, profile.maxDistance);
       })
       .then(list => {
         // order by tags match and distance
