@@ -1,8 +1,5 @@
-<md-toolbar class="navbar" md-scroll-shrink>
+<md-toolbar class="navbar" md-scroll-shrink hide-sm>
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Toggle">
-      <i class="mdi mdi-menu" ng-click="nav.toggleSidenav()"></i>
-    </md-button>
     <h2>
       <span></span>
       <md-button ui-sref="main">OBOM</md-button>
@@ -10,15 +7,69 @@
     <md-button ng-repeat="item in nav.menu" ui-sref-active="active" ui-sref="{{item.state}}">
       {{item.title}}
     </md-button>
-    <md-button ng-show="nav.isAdmin()" ui-sref-active="active" ui-sref="admin">Admin</md-button>
+    <md-button ng-show="nav.isAdmin()" ui-sref-active="active" ui-sref="admin">Users</md-button>
     <span flex></span>
     <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
     <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="login">Sign in</md-button>
-    <md-button ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </md-button>
-    <md-button ng-show="nav.isLoggedIn()" ui-sref-active="active" aria-label="settings" ui-sref="settings"><i class="zmdi zmdi-wrench"></i></md-button>
-    <md-button ng-show="nav.isLoggedIn()" ui-sref="logout">Sign out</md-button>
-    <md-button class="md-icon-button" aria-label="More">
-      <i class="mdi mdi-dots-vertical"></i>
-    </md-button>
+
+    <md-menu>
+      <md-button ng-show="nav.isLoggedIn()" aria-label="User" ng-click="$mdOpenMenu()">
+        {{ nav.getCurrentUser().name }}
+        <md-icon md-svg-icon="account"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">
+          <md-button ui-sref="settings"><span md-menu-align-target>My Profil</span></md-button>
+        </md-menu-item>
+        <md-menu-divider ng-show="nav.isLoggedIn()"></md-menu-divider>
+        <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">
+          <md-button ui-sref="logout"><span md-menu-align-target>Sign out</span></md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="navbar" md-scroll-shrink hide-gt-sm>
+  <div class="md-toolbar-tools">
+    <h2>
+      <span></span>
+      <md-button ui-sref="main">OBOM</md-button>
+    </h2>
+
+    <md-menu>
+      <md-button aria-label="User" ng-click="$mdOpenMenu()">
+        <md-icon md-svg-icon="dots-vertical"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item ng-repeat="item in nav.menu" ui-sref-active="active">
+          <md-button ui-sref="{{item.state}}">
+            {{item.title}}
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-show="nav.isAdmin()">
+          <md-button ui-sref-active="active" ui-sref="admin">Users</md-button>
+        </md-menu-item>
+        <md-menu-divider ng-hide="nav.isLoggedIn()"></md-menu-divider>
+
+        <md-menu-item ng-hide="nav.isLoggedIn()">
+          <md-button ui-sref-active="active" ui-sref="signup">Sign up</md-button>
+        </md-menu-item>
+        <md-menu-item ng-hide="nav.isLoggedIn()">
+          <md-button ui-sref-active="active" ui-sref="login">Sign in</md-button>
+        </md-menu-item>
+
+        <md-menu-divider ng-show="nav.isLoggedIn()"></md-menu-divider>
+
+        <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">
+          <md-button ui-sref="settings"><span md-menu-align-target>My Profil</span></md-button>
+        </md-menu-item>
+        <md-menu-divider ng-show="nav.isLoggedIn()"></md-menu-divider>
+        <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">
+          <md-button ui-sref="logout"><span md-menu-align-target>Sign out</span></md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
   </div>
 </md-toolbar>

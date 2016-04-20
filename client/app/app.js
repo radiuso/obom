@@ -4,7 +4,6 @@ angular.module('obmApp', [
   'obmApp.auth',
   'obmApp.admin',
   'obmApp.constants',
-  'obmApp.things',
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -16,7 +15,7 @@ angular.module('obmApp', [
   'uiGmapgoogle-maps',
   'LocalStorageModule'
 ])
-  .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider, $mdIconProvider) {
     $urlRouterProvider
       .otherwise('/');
 
@@ -29,9 +28,12 @@ angular.module('obmApp', [
       .setPrefix('obom')
       .setStorageType('localStorage') // localStorage or sessionStorage
       ;
+
+    $mdIconProvider
+      .defaultIconSet('assets/images/mdi.svg');
   })
   .run(function(loader, POIService) {
     POIService.getAll().then((response) => {
-      
+
     });
   });
